@@ -4,24 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="593b0bf2-8920-4fda-a742-c400d39d3b5d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.smarttomcat/Fake_Hotell_InGroup/conf/catalina.policy" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.smarttomcat/Fake_Hotell_InGroup/conf/catalina.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.smarttomcat/Fake_Hotell_InGroup/conf/context.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.smarttomcat/Fake_Hotell_InGroup/conf/jaspic-providers.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.smarttomcat/Fake_Hotell_InGroup/conf/jaspic-providers.xsd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.smarttomcat/Fake_Hotell_InGroup/conf/logging.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.smarttomcat/Fake_Hotell_InGroup/conf/server.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.smarttomcat/Fake_Hotell_InGroup/conf/tomcat-users.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.smarttomcat/Fake_Hotell_InGroup/conf/tomcat-users.xsd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.smarttomcat/Fake_Hotell_InGroup/conf/web.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/fake_hotell_ingroup/model/Booking.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/fake_hotell_ingroup/service/BookingDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/fake_hotell_ingroup/service/IBookingDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+    <list default="true" id="593b0bf2-8920-4fda-a742-c400d39d3b5d" name="Changes" comment="Save point: Sơ lược cơ bản đặt phòng, trả phòng,">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/e6b59519-9625-41d1-837d-77053cd237ac.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/e6b59519-9625-41d1-837d-77053cd237ac/storage_v2/_src_/schema/fake_hotell.YqGeMA.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/fake_hotell_ingroup/controller/RentRoomFormServlet_Temporary.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/fake_hotell_ingroup/controller/RoomController_Temporary.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/fake_hotell_ingroup/controller/RoomReturnServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/fake_hotell_ingroup/dao/RoomDao_Temporary.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/fake_hotell_ingroup/model/Room_Temporary.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/Room_Temporary/listRoom.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/Room_Temporary/rentRoomForm_Temporary.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/Room_Temporary/returnRoom.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/fake_hotell_ingroup/model/ex.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/fake_hotell_ingroup/service/ex.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/fake_hotell_ingroup/controller/BookingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/fake_hotell_ingroup/controller/BookingController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,6 +33,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Jsp File" />
         <option value="Class" />
       </list>
     </option>
@@ -83,10 +81,12 @@
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "Gradle.Build Fake_Hotell_Case_Mod3.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Smart Tomcat.Tomcat: Fake_Hotell_InGroup.executor": "Run",
     "Tomcat Server.Tomcat 9.0.97.executor": "Run",
     "git-widget-placeholder": "locbranch",
     "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/CodeGym/Module 3/UserManagementUsingJSPServletJDBCMySQL",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -100,9 +100,14 @@
     ]
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\CodeGym\Fake_Hotell_Case_Mod3\src\main\webapp\Room_Temporary" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Tomcat Server.Tomcat 9.0.97">
     <configuration name="Tomcat 9.0.97" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.97" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
-      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080//Fake_Hotell" />
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080//rooms" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
         <artifact name="Gradle : com.example : Fake_Hotell_InGroup-1.0-SNAPSHOT.war">
@@ -189,6 +194,41 @@
         </option>
       </method>
     </configuration>
+    <configuration name="Tomcat: Fake_Hotell_InGroup" type="com.poratu.idea.plugins.tomcat" temporary="true">
+      <predefined_log_file enabled="true" id="Tomcat Localhost Log" />
+      <predefined_log_file enabled="true" id="Tomcat Access Log" />
+      <predefined_log_file id="Tomcat Catalina Log" />
+      <predefined_log_file id="Tomcat Manager Log" />
+      <predefined_log_file id="Tomcat Host Manager Log" />
+      <option name="catalinaBase" value="" />
+      <option name="contextPath" value="/Fake_Hotell_InGroup" />
+      <option name="docBase" value="$PROJECT_DIR$/src/main/webapp" />
+      <option name="envOptions">
+        <map />
+      </option>
+      <option name="extraClassPath" value="" />
+      <option name="tomcatInfo">
+        <TomcatInfo>
+          <option name="name" value="Apache Tomcat/9.0.97" />
+          <option name="path" value="$USER_HOME$/Downloads/apache-tomcat-9.0.97" />
+          <option name="version" value="9.0.97.0" />
+        </TomcatInfo>
+      </option>
+      <option name="vmOptions" value="" />
+      <module name="Fake_Hotell_InGroup" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Smart Tomcat.Tomcat: Fake_Hotell_InGroup" />
+      <item itemvalue="Tomcat Server.Tomcat 9.0.97" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Smart Tomcat.Tomcat: Fake_Hotell_InGroup" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -207,8 +247,25 @@
       <option name="presentableId" value="Default" />
       <updated>1733448365829</updated>
       <workItem from="1733448366921" duration="3000" />
-      <workItem from="1733449639305" duration="5869000" />
+      <workItem from="1733449639305" duration="25573000" />
     </task>
+    <task id="LOCAL-00001" summary="Model BookingDao tạm thời,  Tạo xong Interface Dao và Dao sơ lược &lt;bản nháp không merge&gt;">
+      <option name="closed" value="true" />
+      <created>1733456051855</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1733456051855</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Save point: Sơ lược cơ bản đặt phòng, trả phòng,">
+      <option name="closed" value="true" />
+      <created>1733460181645</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1733460181645</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -216,5 +273,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Model BookingDao tạm thời,  Tạo xong Interface Dao và Dao sơ lược &lt;bản nháp không merge&gt;" />
+    <MESSAGE value="Save point: Sơ lược cơ bản đặt phòng, trả phòng," />
+    <option name="LAST_COMMIT_MESSAGE" value="Save point: Sơ lược cơ bản đặt phòng, trả phòng," />
   </component>
 </project>

@@ -69,6 +69,7 @@ public class BookingController extends HttpServlet {
             bookingDAO.updateRoomStatus(roomId, "rented"); // Đặt phòng thành trạng thái "đã thuê"
             response.sendRedirect("rooms"); // Chuyển hướng về danh sách phòng
         } catch (SQLException e) {
+
             throw new ServletException(e);
         }
     }

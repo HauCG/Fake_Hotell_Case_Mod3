@@ -1,0 +1,75 @@
+CREATE DATABASE Fake_Hotell;
+USE Fake_Hotell;
+
+CREATE TABLE User (
+UserId INT PRIMARY KEY,
+UserEmail VARCHAR(250) NOT NULL UNIQUE,
+UserPassword VARCHAR(250) NOT NULL,
+UserName VARCHAR(250) NOT NULL,
+UserBirthDate DATE NOT NULL,
+UserPhoneNumber VARCHAR(15) NOT NULL,
+UserAvatarLink VARCHAR(250),
+UserRole ENUM('admin', 'customer')
+);
+-- mk mã hóa là sao ?
+-- dới 18tuoi ko đc đk
+
+CREATE TABLE RoomType (
+RoomTypeId INT PRIMARY KEY AUTO_INCREMENT,
+RoomTypeName VARCHAR(30) NOT NULL
+);
+INSERT INTO RoomType(RoomTypeName) VALUES ('Đơn', 'Đôi', 'Vip');
+-- tách riêng để có thể thêm được phân khúc khác
+
+CREATE TABLE Room (
+RoomId INT PRIMARY KEY,
+RoomTypeId INT NOT NULL,
+RoomOwner INT NOT NULL,
+RoomCode VARCHAR(50) NOT NULL,
+RoomLocation VARCHAR(250) NOT NULL,
+RoomDescription TEXT,
+RoomImgLink VARCHAR(250),
+RoomPrice DOUBLE NOT NULL,
+RoomStatus ENUM('available', 'rented'),
+RoomCreateDate TIMESTAMP NOT NULL,
+RoomUpdateDate TIMESTAMP NOT NULL,
+FOREIGN KEY (RoomOwner) REFERENCES User(UserId),
+FOREIGN KEY (RoomTypeId) REFERENCES RoomType(RoomTypeId)
+);
+-- RoomOwner người sở hữu phòng tham chiếu id của user (done)
+-- roomcode thì có chức năng tạo mã phòng ngẫu nhiên và thêm lặp kiểm tra xem có trùng ko (nên dùng dowhile)
+-- khi tạo phòng thì RoomUpdateDate sẽ trống , hiển thị phòng chỉ hiển thị ngày gần nhất tức là cái roomupdate đó
+
+CREATE TABLE Booking (
+BookingId INT PRIMARY KEY AUTO_INCREMENT,
+RoomId INT NOT NULL,
+UserId INT NOT NULL,
+BookingStartDate TIMESTAMP NOT NULL,
+BookingEndDate TIMESTAMP NOT NULL,
+BookingTotalPrice DOUBLE NOT NULL,
+BookingStatus ENUM('confirming', 'available','completed', 'canceled'),
+BookingCreateTime TIMESTAMP NOT NULL,
+BookingUpdateTime TIMESTAMP NOT NULL,
+FOREIGN KEY (RoomId) REFERENCES Room(RoomId),
+FOREIGN KEY (UserId) REFERENCES User(UserId)
+);
+-- biến booking RoomOwner thì join với bảng room ra
+-- khi tạo một book thì BookingUpdateTime sẽ trống , hiển thị phòng chỉ hiển thị ngày gần nhất tức là cái BookingUpdateTime đó
+-- tạo liên kết phòng của ai và phòng ai đặt riêng để tăng income ở dưới
+
+CREATE TABLE Income (
+IncomeId INT PRIMARY KEY AUTO_INCREMENT,
+UserId INT NOT NULL,
+IncomeMonth INT NOT NULL,
+IncomeYear INT NOT NULL,
+IncomeTotal DOUBLE NOT NULL DEFAULT 0,
+IncomeCreateTime TIMESTAMP NOT NULL,
+IncomeUpdateTime TIMESTAMP NOT NULL,
+FOREIGN KEY (UserId) REFERENCES User(UserId)
+);
+-- Lấy tháng hiện tại thì CURRENT_DATE,
+-- tạo hàm liên kết sao cho tự tăng income của user nào sau khi phòng của user đó được hoàn thành
+
+
+
+-- Thêm bảng chat với admin nữa để thay cho chat với zalo (PT)

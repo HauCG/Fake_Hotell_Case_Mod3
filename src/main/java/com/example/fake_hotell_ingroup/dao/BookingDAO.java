@@ -1,12 +1,17 @@
-package com.example.fake_hotell_ingroup.service;
+package com.example.fake_hotell_ingroup.dao;
 
+import com.example.fake_hotell_ingroup.dao.IBookingDAOImpl;
 import com.example.fake_hotell_ingroup.model.Booking;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-public class BookingDAO {
+public class BookingDAO implements IBookingDAOImpl {
     private Connection conn;
 
     public BookingDAO(Connection conn) {
@@ -61,5 +66,38 @@ public class BookingDAO {
         } finally {
             conn.setAutoCommit(true);
         }
+    }
+
+    @Override
+    public List<Booking> getAllBookings() throws SQLException {
+        List<Booking> bookings = new ArrayList<>();
+        String sql = "SELECT * FROM Booking";
+        try (PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                Booking booking = new Booking();
+                booking.setBookingId(rs.getInt("BookingId"));
+                booking.setRoomId(rs.getInt("RoomId"));
+                booking.setUserId(rs.getInt("UserId"));
+                booking.setBookingStartDate(rs.getTimestamp("BookingStartDate"));
+                booking.setBookingEndDate(rs.getTimestamp("BookingEndDate"));
+                booking.setTotalPrice(rs.getDouble("BookingTotalPrice"));
+                booking.getStatus(rs.getString("BookingStatus"));
+                bookings.add(booking);
+            }
+        }
+        return bookings;
+    }
+
+
+//    Chua trien khai
+    @Override
+    public List<Booking> getBookingsByUserId(int userId) throws SQLException {
+        return Collections.emptyList();
+    }
+    //    Chua trien khai
+    @Override
+    public Booking getBookingById(int bookingId) throws SQLException {
+        return null;
     }
 }

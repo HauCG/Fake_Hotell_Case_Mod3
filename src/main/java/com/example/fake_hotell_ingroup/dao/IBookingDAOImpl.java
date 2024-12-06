@@ -1,11 +1,11 @@
-package com.example.fake_hotell_ingroup.service;
+package com.example.fake_hotell_ingroup.dao;
 
 import com.example.fake_hotell_ingroup.model.Booking;
 
 import java.sql.SQLException;
 import java.util.List;
 
-public interface IBookingDAO {
+public interface IBookingDAOImpl {
 
     // Thêm mới booking
     boolean addBooking(Booking booking) throws SQLException;
@@ -21,6 +21,9 @@ public interface IBookingDAO {
 
     // Lấy thông tin booking theo bookingId
     Booking getBookingById(int bookingId) throws SQLException;
+
+    public List<Booking> getAllBookings() throws SQLException;
+
 
     // Lấy danh sách phòng đã được đặt (status = 'rented')
 //    List<Room> getRentedRooms() throws SQLException;

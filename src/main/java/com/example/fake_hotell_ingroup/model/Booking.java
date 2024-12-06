@@ -77,7 +77,7 @@ public class Booking {
         this.totalPrice = totalPrice;
     }
 
-    public String getStatus() {
+    public String getStatus(String bookingStatus) {
         return status;
     }
 

@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="593b0bf2-8920-4fda-a742-c400d39d3b5d" name="Changes" comment="Save point: Sơ lược cơ bản đặt phòng, trả phòng,">
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/RoomBooking/thongbaodatphongthanhcong.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/ThungRacDesign/listRoomBookingDesign.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/ThungRacDesign/rentRoomForm_Temporarydesign.jsp" afterDir="false" />
+    <list default="true" id="593b0bf2-8920-4fda-a742-c400d39d3b5d" name="Changes" comment="Hoan thien xong cac tinh nang cơ ban, chi con css">
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
@@ -24,8 +21,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Jsp File" />
         <option value="Class" />
+        <option value="Jsp File" />
       </list>
     </option>
   </component>
@@ -240,7 +237,7 @@
       <workItem from="1733623261696" duration="3228000" />
       <workItem from="1733632507527" duration="865000" />
       <workItem from="1733642595883" duration="101000" />
-      <workItem from="1733665833928" duration="593000" />
+      <workItem from="1733665833928" duration="12840000" />
     </task>
     <task id="LOCAL-00001" summary="Model BookingDao tạm thời,  Tạo xong Interface Dao và Dao sơ lược &lt;bản nháp không merge&gt;">
       <option name="closed" value="true" />
@@ -258,16 +255,84 @@
       <option name="project" value="LOCAL" />
       <updated>1733460181645</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Tương đối hoàn thiện chức năng chính của đặt phòng, đã css xong jsp đặt phòng, css chưa xong list đặt phòng, chưa làm xong jsp trả phòng">
+      <option name="closed" value="true" />
+      <created>1733666756167</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1733666756167</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Hoan thien xong cac tinh nang cơ ban, chi con css">
+      <option name="closed" value="true" />
+      <created>1733677714720</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1733677714720</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Model BookingDao tạm thời,  Tạo xong Interface Dao và Dao sơ lược &lt;bản nháp không merge&gt;" />
     <MESSAGE value="Save point: Sơ lược cơ bản đặt phòng, trả phòng," />
-    <option name="LAST_COMMIT_MESSAGE" value="Save point: Sơ lược cơ bản đặt phòng, trả phòng," />
+    <MESSAGE value="Tương đối hoàn thiện chức năng chính của đặt phòng, đã css xong jsp đặt phòng, css chưa xong list đặt phòng, chưa làm xong jsp trả phòng" />
+    <MESSAGE value="Hoan thien xong cac tinh nang cơ ban, chi con css" />
+    <option name="LAST_COMMIT_MESSAGE" value="Hoan thien xong cac tinh nang cơ ban, chi con css" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/temporary/controller/RoomRentFormController.java</url>
+          <line>150</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/temporary/controller/RoomRentFormController.java</url>
+          <line>166</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/temporary/controller/RoomRentFormController.java</url>
+          <line>164</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/temporary/dao/RoomBookingDaoImpl.java</url>
+          <line>209</line>
+          <properties class="org.example.temporary.dao.RoomBookingDaoImpl">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/temporary/dao/RoomBookingDaoImpl.java</url>
+          <line>219</line>
+          <properties class="org.example.temporary.dao.RoomBookingDaoImpl" method="updateRoomStatustoSql_HuyPhong_rutgon">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

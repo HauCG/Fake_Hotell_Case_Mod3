@@ -5,8 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="593b0bf2-8920-4fda-a742-c400d39d3b5d" name="Changes" comment="Save point: Sơ lược cơ bản đặt phòng, trả phòng,">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/e6b59519-9625-41d1-837d-77053cd237ac.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/e6b59519-9625-41d1-837d-77053cd237ac.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/RoomBooking/thongbaodatphongthanhcong.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/ThungRacDesign/listRoomBookingDesign.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/ThungRacDesign/rentRoomForm_Temporarydesign.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -65,30 +67,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;Gradle.Build Fake_Hotell_Case_Mod3.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Smart Tomcat.Tomcat: Fake_Hotell_InGroup.executor&quot;: &quot;Run&quot;,
-    &quot;Tomcat Server.Tomcat 9.0.97.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;locbranch&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/CodeGym/Module 3/UserManagementUsingJSPServletJDBCMySQL&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Gradle.Build Fake_Hotell_Case_Mod3.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Smart Tomcat.Tomcat: Fake_Hotell_InGroup.executor": "Run",
+    "Tomcat Server.Tomcat 9.0.97.executor": "Run",
+    "git-widget-placeholder": "locbranch",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/CodeGym/Fake_Hotell_Case_Mod3",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\CodeGym\Fake_Hotell_Case_Mod3\src\main\webapp\Room_Temporary" />
@@ -235,6 +237,10 @@
       <workItem from="1733448366921" duration="3000" />
       <workItem from="1733449639305" duration="25573000" />
       <workItem from="1733534844898" duration="8706000" />
+      <workItem from="1733623261696" duration="3228000" />
+      <workItem from="1733632507527" duration="865000" />
+      <workItem from="1733642595883" duration="101000" />
+      <workItem from="1733665833928" duration="593000" />
     </task>
     <task id="LOCAL-00001" summary="Model BookingDao tạm thời,  Tạo xong Interface Dao và Dao sơ lược &lt;bản nháp không merge&gt;">
       <option name="closed" value="true" />

@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="593b0bf2-8920-4fda-a742-c400d39d3b5d" name="Changes" comment="Hoan thien xong cac tinh nang cơ ban, chi con css">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+    <list default="true" id="593b0bf2-8920-4fda-a742-c400d39d3b5d" name="Changes" comment="Hoan thien xong cac tinh nang cơ ban, chi con css ver5">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/temporary/controller/PdfExportExample.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/RoomBooking/cancelRentRoomForm.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/RoomBooking/cancelRentRoomForm.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,8 +24,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Jsp File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -68,13 +71,15 @@
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "Gradle.Build Fake_Hotell_Case_Mod3.executor": "Run",
+    "Gradle.Download Sources.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Smart Tomcat.Tomcat: Fake_Hotell_InGroup.executor": "Run",
     "Tomcat Server.Tomcat 9.0.97.executor": "Run",
+    "database.data.extractors.current.export.id": "SQL-Insert-Multirow.sql.groovy",
     "git-widget-placeholder": "locbranch",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/CodeGym/Fake_Hotell_Case_Mod3",
+    "last_opened_file_path": "C:/Users/Public/Downloads",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -237,7 +242,8 @@
       <workItem from="1733623261696" duration="3228000" />
       <workItem from="1733632507527" duration="865000" />
       <workItem from="1733642595883" duration="101000" />
-      <workItem from="1733665833928" duration="12840000" />
+      <workItem from="1733665833928" duration="12876000" />
+      <workItem from="1733706392883" duration="8602000" />
     </task>
     <task id="LOCAL-00001" summary="Model BookingDao tạm thời,  Tạo xong Interface Dao và Dao sơ lược &lt;bản nháp không merge&gt;">
       <option name="closed" value="true" />
@@ -271,7 +277,15 @@
       <option name="project" value="LOCAL" />
       <updated>1733677714720</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Hoan thien xong cac tinh nang cơ ban, chi con css ver5">
+      <option name="closed" value="true" />
+      <created>1733678708423</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1733678708423</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -294,7 +308,8 @@
     <MESSAGE value="Save point: Sơ lược cơ bản đặt phòng, trả phòng," />
     <MESSAGE value="Tương đối hoàn thiện chức năng chính của đặt phòng, đã css xong jsp đặt phòng, css chưa xong list đặt phòng, chưa làm xong jsp trả phòng" />
     <MESSAGE value="Hoan thien xong cac tinh nang cơ ban, chi con css" />
-    <option name="LAST_COMMIT_MESSAGE" value="Hoan thien xong cac tinh nang cơ ban, chi con css" />
+    <MESSAGE value="Hoan thien xong cac tinh nang cơ ban, chi con css ver5" />
+    <option name="LAST_COMMIT_MESSAGE" value="Hoan thien xong cac tinh nang cơ ban, chi con css ver5" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

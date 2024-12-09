@@ -5,41 +5,23 @@ import java.sql.Timestamp;
 public class Room {
     private int roomId;
     private int roomTypeId;
-    private int roomOwner;
     private String roomCode;
     private String roomLocation;
     private String roomDescription;
     private String roomImgLink;
     private double roomPrice;
-    private String roomStatus;
-    private Timestamp roomCreateDate;
-    private Timestamp roomUpdateDate;
 
     public Room() {
     }
 
-    public Room(int roomId, int roomTypeId, int roomOwner, String roomCode, String roomLocation, String roomDescription, String roomImgLink, double roomPrice, String roomStatus, Timestamp roomCreateDate, Timestamp roomUpdateDate) {
+    public Room(int roomId, int roomTypeId, String roomCode, String roomLocation, String roomDescription, String roomImgLink, double roomPrice) {
         this.roomId = roomId;
         this.roomTypeId = roomTypeId;
-        this.roomOwner = roomOwner;
         this.roomCode = roomCode;
         this.roomLocation = roomLocation;
         this.roomDescription = roomDescription;
         this.roomImgLink = roomImgLink;
         this.roomPrice = roomPrice;
-        this.roomStatus = roomStatus;
-        this.roomCreateDate = roomCreateDate;
-        this.roomUpdateDate = roomUpdateDate;
-    }
-
-    public Room(int roomId, String roomCode, String roomDescription, String roomImgLink, String roomTypeId, Double roomPrice, String roomStatus) {
-        this.roomId = roomId;
-        this.roomCode = roomCode;
-        this.roomDescription = roomDescription;
-        this.roomImgLink = roomImgLink;
-        this.roomTypeId = Integer.parseInt(roomTypeId);
-        this.roomPrice = roomPrice;
-        this.roomStatus = roomStatus;
     }
 
 
@@ -57,14 +39,6 @@ public class Room {
 
     public void setRoomTypeId(int roomTypeId) {
         this.roomTypeId = roomTypeId;
-    }
-
-    public int getRoomOwner() {
-        return roomOwner;
-    }
-
-    public void setRoomOwner(int roomOwner) {
-        this.roomOwner = roomOwner;
     }
 
     public String getRoomCode() {
@@ -105,29 +79,5 @@ public class Room {
 
     public void setRoomPrice(double roomPrice) {
         this.roomPrice = roomPrice;
-    }
-
-    public String getRoomStatus() {
-        return roomStatus;
-    }
-
-    public void setRoomStatus(String roomStatus) {
-        this.roomStatus = roomStatus;
-    }
-
-    public Timestamp getRoomCreateDate() {
-        return roomCreateDate;
-    }
-
-    public void setRoomCreateDate(Timestamp roomCreateDate) {
-        this.roomCreateDate = roomCreateDate;
-    }
-
-    public Timestamp getRoomUpdateDate() {
-        return roomUpdateDate;
-    }
-
-    public void setRoomUpdateDate(Timestamp roomUpdateDate) {
-        this.roomUpdateDate = roomUpdateDate;
     }
 }

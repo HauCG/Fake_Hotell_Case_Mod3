@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class RoomServiceImpl implements RoomService {
-private final RoomDao roomDao = new RoomDaoImpl();
+    private final RoomDao roomDao = new RoomDaoImpl();
 
     @Override
     public List<Room> findAllRoom() throws SQLException {

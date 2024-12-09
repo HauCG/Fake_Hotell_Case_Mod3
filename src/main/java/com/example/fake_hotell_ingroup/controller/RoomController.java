@@ -16,7 +16,8 @@ import java.util.List;
 
 @WebServlet(name = "RoomController", urlPatterns = "/Room")
 public class RoomController extends HttpServlet {
-    private final RoomServiceImpl roomServiceIml = new RoomServiceImpl();
+    private final RoomService roomService = new RoomServiceImpl();
+
 
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
@@ -24,12 +25,6 @@ public class RoomController extends HttpServlet {
             action = "";
         }
         switch (action) {
-            case "listRoom":
-                try {
-                    listRoom(req, resp);
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
             case "viewRoom":
                 try {
                     viewRoom(req, resp);
@@ -37,12 +32,12 @@ public class RoomController extends HttpServlet {
                     throw new RuntimeException(e);
                 }
                 break;
-            case "addRoomForm":
+            case "addRoom":
                 showAddRoomForm(req, resp);
                 break;
-            case "editRoomForm":
+            case "editRoom":
                 try {
-                    showEditRoomForm(req, resp);
+                    showEditForm(req, resp);
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
@@ -55,28 +50,26 @@ public class RoomController extends HttpServlet {
                 }
                 break;
             default:
-                try {
-                    listRoom(req, resp);
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
+                listRoom(req, resp);
                 break;
         }
     }
 
-    private void deleteRoom(HttpServletRequest req, HttpServletResponse resp) throws SQLException, IOException {
+    private void deleteRoom(HttpServletRequest req, HttpServletResponse resp) throws SQLException, IOException, ServletException {
         int roomId = Integer.parseInt(req.getParameter("roomId"));
-        boolean deleteStatus = roomServiceIml.deleteRoom(roomId);
-        String message = deleteStatus ? "Room was deleted successfully" : "Failed to delete Room";
-        req.setAttribute("message", message);
-        resp.sendRedirect("Room");
-
+        boolean deleteStatus = roomService.deleteRoom(roomId);
+        if (deleteStatus) {
+            resp.sendRedirect("Room?action=listRoom");
+        } else {
+            req.setAttribute("error", "Không thể xóa phòng.");
+            listRoom(req, resp);
+        }
     }
 
-    private void showEditRoomForm(HttpServletRequest req, HttpServletResponse resp) throws SQLException, ServletException, IOException {
+    private void showEditForm(HttpServletRequest req, HttpServletResponse resp) throws SQLException, ServletException, IOException {
         int roomId = Integer.parseInt(req.getParameter("roomId"));
-        Room room = roomServiceIml.getRoomById(roomId);
-        req.setAttribute("Room", room);
+        Room room = roomService.getRoomById(roomId);
+        req.setAttribute("room", room);
         RequestDispatcher dispatcher = req.getRequestDispatcher("Room/edit.jsp");
         dispatcher.forward(req, resp);
     }
@@ -88,18 +81,27 @@ public class RoomController extends HttpServlet {
 
     private void viewRoom(HttpServletRequest req, HttpServletResponse resp) throws SQLException, ServletException, IOException {
         int roomId = Integer.parseInt(req.getParameter("roomId"));
-        Room room = roomServiceIml.getRoomById(roomId);
+        Room room = roomService.getRoomById(roomId);
         req.setAttribute("room", room);
         RequestDispatcher dispatcher = req.getRequestDispatcher("Room/view.jsp");
         dispatcher.forward(req, resp);
     }
 
-    private void listRoom(HttpServletRequest req, HttpServletResponse resp) throws SQLException, ServletException, IOException {
-        List<Room> rooms = roomServiceIml.findAllRoom();
-        req.setAttribute("room", rooms);
-        RequestDispatcher dispatcher = req.getRequestDispatcher("Room/list.jsp");
-        dispatcher.forward(req, resp);
+    private void listRoom(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        try {
+            List<Room> room = roomService.findAllRoom();
+            req.setAttribute("room", room);
+            RequestDispatcher dispatcher = req.getRequestDispatcher("Room/list.jsp");
+            dispatcher.forward(req, resp);
+        } catch (SQLException e) {
+            e.printStackTrace(); // Ghi log lỗi chi tiết
+            req.setAttribute("error", "Cannot retrieve the room list.");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("error.jsp");
+            dispatcher.forward(req, resp);
+        }
     }
+
+
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         String action = req.getParameter("action");
@@ -115,42 +117,45 @@ public class RoomController extends HttpServlet {
                 }
                 break;
             case "editRoom":
-                editRoom(req, resp);
-                break;
-            default:
                 try {
-                    listRoom(req, resp);
+                    editRoom(req, resp);
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
                 break;
+            default:
+                listRoom(req, resp);
+                break;
         }
     }
 
-    private void editRoom(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    private void editRoom(HttpServletRequest req, HttpServletResponse resp) throws IOException, SQLException {
         int roomId = Integer.parseInt(req.getParameter("roomId"));
+        Integer roomTypeId = Integer.valueOf(req.getParameter("roomTypeId"));
         String roomCode = req.getParameter("roomCode");
+        String roomLocation = req.getParameter("roomLocation");
         String roomDescription = req.getParameter("roomDescription");
         String roomImgLink = req.getParameter("roomImgLink");
-        String roomTypeId = req.getParameter("roomTypeId");
         Double roomPrice = Double.valueOf(req.getParameter("roomPrice"));
-        String roomStatus = req.getParameter("roomStatus");
 
-        Room room = new Room(roomId, roomCode, roomDescription, roomImgLink, roomTypeId, roomPrice, roomStatus);
-        resp.sendRedirect("Room?action=listRoom");
+        Room room = new Room(roomId, roomTypeId, roomCode, roomLocation, roomDescription, roomImgLink, roomPrice);
+        roomService.updateRoom(room); // Gọi phương thức update từ RoomService
+        resp.sendRedirect("Room?action=roomId");
+
     }
 
     private void addRoom(HttpServletRequest req, HttpServletResponse resp) throws IOException, SQLException {
         int roomId = Integer.parseInt(req.getParameter("roomId"));
+        Integer roomTypeId = Integer.valueOf(req.getParameter("roomTypeId"));
         String roomCode = req.getParameter("roomCode");
+        String roomLocation = req.getParameter("roomLocation");
         String roomDescription = req.getParameter("roomDescription");
         String roomImgLink = req.getParameter("roomImgLink");
-        String roomTypeId = req.getParameter("roomTypeId");
         Double roomPrice = Double.valueOf(req.getParameter("roomPrice"));
-        String roomStatus = req.getParameter("roomStatus");
 
-        Room room = new Room(roomId, roomCode, roomDescription, roomImgLink, roomTypeId, roomPrice, roomStatus);
-        roomServiceIml.addRoom(room);
+
+        Room room = new Room(roomId, roomTypeId, roomCode, roomLocation, roomDescription, roomImgLink, roomPrice);
+        roomService.addRoom(room);
         resp.sendRedirect("Room?action=listRoom");
     }
 

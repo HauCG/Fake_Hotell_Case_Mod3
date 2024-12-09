@@ -5,61 +5,88 @@
   Time: 00:41
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chi Tiết Sản Phẩm</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Chi tiết phòng</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             background-color: #f8f9fa;
+            font-family: 'Montserrat', sans-serif;
         }
+
         .card {
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border: none;
+            border-radius: 1.5rem;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+            background: white;
+            padding: 2rem;
+            margin-top: 2rem;
         }
-        .btn-secondary {
-            background-color: #6c757d;
-            border: none;
+
+        .btn-back {
+            margin-top: 1rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.5px;
         }
-        .btn-secondary:hover {
-            background-color: #5a6268;
+
+        .room-img {
+            max-width: 100%;
+            border-radius: 1rem;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+        }
+
+        .room-detail h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+
+        .room-detail .info {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .room-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #e74c3c;
+            margin-top: 1rem;
         }
     </style>
 </head>
 <body>
-<div class="container mt-5">
-    <h1 class="text-center text-primary fw-bold display-4 shadow-lg p-3 bg-white rounded">
-        Chi Tiết Phòng
-    </h1>
-    <c:choose>
-        <c:when test="${not empty Room}">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">${products.name}</h5>
-                    <p class="card-text"><strong>Mã sản phẩm:</strong> ${products.id}</p>
-                    <p class="card-text"><strong>Giá:</strong> <fmt:formatNumber value="${products.price}" type="currency" currencySymbol="₫" /></p>
-                    <p class="card-text"><strong>Màu sắc:</strong> ${products.color}</p>
-                </div>
+<div class="container">
+    <a href="Room?action=listRoom" class="btn btn-secondary btn-back"><i class="fas fa-arrow-left me-2"></i>Quay lại</a>
+    <div class="card">
+        <div class="row">
+            <!-- Phần hình ảnh -->
+            <div class="col-md-5">
+                <img src="${room.roomImgLink}" alt="Hình ảnh phòng" class="room-img">
             </div>
-        </c:when>
-        <c:otherwise>
-            <div class="alert alert-danger mt-4" role="alert">
-                Không tìm thấy sản phẩm.
+            <!-- Phần thông tin -->
+            <div class="col-md-7 room-detail">
+                <h1>Thông tin phòng: ${room.roomCode}</h1>
+                <p class="info"><strong>Địa điểm:</strong> ${room.roomLocation}</p>
+                <p class="info"><strong>Thể loại phòng:</strong> ${room.roomTypeId}</p>
+                <p class="info"><strong>Mô tả:</strong> ${room.roomDescription}</p>
+                <p class="room-price">Giá: ${room.roomPrice} VNĐ</p>
             </div>
-        </c:otherwise>
-    </c:choose>
-    <div class="mt-4">
-        <a href="products?action=list" class="btn btn-secondary w-100">Quay lại</a>
+        </div>
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

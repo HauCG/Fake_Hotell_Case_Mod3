@@ -5,83 +5,87 @@ import com.example.fake_hotell_ingroup.model.Room;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-
-import static java.sql.DriverManager.getConnection;
-
 
 public class RoomDaoImpl implements RoomDao {
     private final DatabaseConnection databaseConnection = new DatabaseConnection();
 
     private static final String SELECT_ALL_ROOM = "SELECT * FROM Room";
-    private static final String INSERT_ROOM_SQL = "INSERT INTO Room (roomId, roomTypeId,roomOwner,roomCode,roomLocation,roomDescription,roomImgLink,roomPrice,roomStatus,roomCreateDate,roomUpdateDate;) VALUES (?, ?, ?);";
-    private static final String DELETE_ROOM_SQL = "delete from Room where roomId = ?;";
-    private static final String UPDATE_ROOM_SQL = "update Room set roomCode = ?,roomDescription= ?, roomImgLink =?,roomTypeId =?,roomPrice =?   where roomId = ?;";
-    private static final String SELECT_ROOM_BY_ID = "select roomId, roomTypeId,roomOwner,roomCode,roomLocation,roomDescription,roomImgLink,roomPrice,roomStatus,roomCreateDate,roomUpdateDate from room where roomId =?";
+    private static final String INSERT_ROOM_SQL = "INSERT INTO Room (roomTypeId, roomCode, roomLocation, roomDescription, roomImgLink, roomPrice) VALUES (?, ?, ?, ?, ?, ?)";
+    private static final String DELETE_ROOM_SQL = "DELETE FROM Room WHERE roomId = ?";
+    private static final String UPDATE_ROOM_SQL = "UPDATE Room SET roomTypeId = ?, roomCode = ?, roomLocation = ?, roomDescription = ?, roomImgLink = ?, roomPrice = ? WHERE roomId = ?";
+    private static final String SELECT_ROOM_BY_ID = "SELECT roomId, roomTypeId, roomCode, roomLocation, roomDescription, roomImgLink, roomPrice FROM Room WHERE roomId = ?";
+    private static final String SEARCH_ROOM_SQL = "SELECT * FROM Room WHERE roomCode LIKE ? OR roomLocation LIKE ?";
 
     @Override
     public List<Room> findAllRoom() throws SQLException {
-        Connection connection = databaseConnection.getConnection();
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_ROOM);
+        List<Room> rooms = new ArrayList<>();
+        try (Connection connection = databaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_ROOM)) {
             ResultSet resultSet = preparedStatement.executeQuery();
-            List<Room> rooms = new ArrayList<>();
             while (resultSet.next()) {
-
-                Room room = new Room(resultSet.getInt("roomId"), resultSet.getInt("roomTypeId"), resultSet.getInt("roomOwner"), resultSet.getString("roomCode"), resultSet.getString("roomLocation"), resultSet.getString("roomDescription"), resultSet.getString("roomImgLink"), resultSet.getDouble("roomPrice"), resultSet.getString("roomStatus"), resultSet.getTimestamp("roomCreateDate"), resultSet.getTimestamp("roomUpdateDate"));
+                Room room = new Room(
+                        resultSet.getInt("roomId"),
+                        resultSet.getInt("roomTypeId"),
+                        resultSet.getString("roomCode"),
+                        resultSet.getString("roomLocation"),
+                        resultSet.getString("roomDescription"),
+                        resultSet.getString("roomImgLink"),
+                        resultSet.getDouble("roomPrice")
+                );
                 rooms.add(room);
             }
-            return rooms;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            printSQLException(e);
         }
+        return rooms;
     }
 
     @Override
     public Room getRoomById(int roomId) throws SQLException {
-        Connection connection = databaseConnection.getConnection();
-        PreparedStatement statement = connection.prepareStatement(SELECT_ROOM_BY_ID);
-        statement.setInt(1, roomId);
-        ResultSet rs = statement.executeQuery();
-        if (rs.next()) {
-            return new Room(
-                    rs.getInt("roomId"),
-                    rs.getInt("roomTypeId"),
-                    rs.getInt("roomOwner"),
-                    rs.getString("roomCode"),
-                    rs.getString("roomLocation"),
-                    rs.getString("roomDescription"),
-                    rs.getString("roomImgLink"),
-                    rs.getDouble("roomPrice"),
-                    rs.getString("roomStatus"),
-                    rs.getTimestamp("roomCreateDate"),
-                    rs.getTimestamp("roomUpdateDate")
-            );
+        Room room = null;
+        try (Connection connection = databaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(SELECT_ROOM_BY_ID)) {
+            statement.setInt(1, roomId);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                room = new Room(
+                        rs.getInt("roomId"),
+                        rs.getInt("roomTypeId"),
+                        rs.getString("roomCode"),
+                        rs.getString("roomLocation"),
+                        rs.getString("roomDescription"),
+                        rs.getString("roomImgLink"),
+                        rs.getDouble("roomPrice")
+                );
+            }
         }
-        return null;
+        return room;
     }
 
     @Override
     public int getNextRoomId() throws SQLException {
-        return 0;
+        String query = "SELECT MAX(roomId) AS maxId FROM Room";
+        try (Connection connection = databaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("maxId") + 1;
+            }
+        }
+        return 1; // Nếu bảng Room rỗng, bắt đầu từ 1.
     }
 
     @Override
     public void addRoom(Room room) throws SQLException {
-        System.out.println(INSERT_ROOM_SQL);
-        try (Connection connection = databaseConnection.getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(INSERT_ROOM_SQL)) {
+        try (Connection connection = databaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_ROOM_SQL)) {
             preparedStatement.setInt(1, room.getRoomTypeId());
-            preparedStatement.setInt(2, room.getRoomOwner());
-            preparedStatement.setString(3, room.getRoomCode());
-            preparedStatement.setString(4, room.getRoomLocation());
-            preparedStatement.setString(5, room.getRoomDescription());
-            preparedStatement.setString(6, room.getRoomImgLink());
-            preparedStatement.setDouble(7, room.getRoomPrice());
-            preparedStatement.setString(8, room.getRoomStatus());
-            preparedStatement.setTimestamp(9, room.getRoomCreateDate());
-            preparedStatement.setTimestamp(10, room.getRoomUpdateDate());
-            System.out.println(preparedStatement);
+            preparedStatement.setString(2, room.getRoomCode());
+            preparedStatement.setString(3, room.getRoomLocation());
+            preparedStatement.setString(4, room.getRoomDescription());
+            preparedStatement.setString(5, room.getRoomImgLink());
+            preparedStatement.setDouble(6, room.getRoomPrice());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             printSQLException(e);
@@ -91,22 +95,16 @@ public class RoomDaoImpl implements RoomDao {
     @Override
     public boolean updateRoom(Room room) throws SQLException {
         boolean rowUpdated;
-        try (Connection connection = databaseConnection.getConnection(); PreparedStatement statement = connection.prepareStatement(UPDATE_ROOM_SQL);) {
+        try (Connection connection = databaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(UPDATE_ROOM_SQL)) {
             statement.setInt(1, room.getRoomTypeId());
-            statement.setInt(2, room.getRoomOwner());
-            statement.setString(3, room.getRoomCode());
-            statement.setString(4, room.getRoomLocation());
-            statement.setString(5, room.getRoomDescription());
-            statement.setString(6, room.getRoomImgLink());
-            statement.setDouble(7, room.getRoomPrice());
-            statement.setString(8, room.getRoomStatus());
-            statement.setTimestamp(9, room.getRoomCreateDate());
-            statement.setTimestamp(10, room.getRoomUpdateDate());
-            statement.setInt(11, room.getRoomId());
-
+            statement.setString(2, room.getRoomCode());
+            statement.setString(3, room.getRoomLocation());
+            statement.setString(4, room.getRoomDescription());
+            statement.setString(5, room.getRoomImgLink());
+            statement.setDouble(6, room.getRoomPrice());
+            statement.setInt(7, room.getRoomId());
             rowUpdated = statement.executeUpdate() > 0;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
         return rowUpdated;
     }
@@ -114,7 +112,8 @@ public class RoomDaoImpl implements RoomDao {
     @Override
     public boolean deleteRoom(int roomId) throws SQLException {
         boolean rowDeleted;
-        try (Connection connection = databaseConnection.getConnection(); PreparedStatement statement = connection.prepareStatement(DELETE_ROOM_SQL);) {
+        try (Connection connection = databaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(DELETE_ROOM_SQL)) {
             statement.setInt(1, roomId);
             rowDeleted = statement.executeUpdate() > 0;
         }
@@ -123,7 +122,26 @@ public class RoomDaoImpl implements RoomDao {
 
     @Override
     public List<Room> searchRoom(String keyword) throws SQLException {
-        return Collections.emptyList();
+        List<Room> rooms = new ArrayList<>();
+        try (Connection connection = databaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SEARCH_ROOM_SQL)) {
+            preparedStatement.setString(1, "%" + keyword + "%");
+            preparedStatement.setString(2, "%" + keyword + "%");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Room room = new Room(
+                        resultSet.getInt("roomId"),
+                        resultSet.getInt("roomTypeId"),
+                        resultSet.getString("roomCode"),
+                        resultSet.getString("roomLocation"),
+                        resultSet.getString("roomDescription"),
+                        resultSet.getString("roomImgLink"),
+                        resultSet.getDouble("roomPrice")
+                );
+                rooms.add(room);
+            }
+        }
+        return rooms;
     }
 
     private void printSQLException(SQLException ex) {
@@ -135,7 +153,7 @@ public class RoomDaoImpl implements RoomDao {
                 System.err.println("Message: " + e.getMessage());
                 Throwable t = ex.getCause();
                 while (t != null) {
-                    System.out.println("Cause: " + t);
+                    System.err.println("Cause: " + t);
                     t = t.getCause();
                 }
             }

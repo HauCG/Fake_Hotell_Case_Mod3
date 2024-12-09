@@ -5,98 +5,126 @@
   Time: 00:41
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
+<%-- Update Room Form --%>
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chỉnh Sửa Sản Phẩm</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Cập Nhật Phòng</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             background-color: #f8f9fa;
-            font-family: Arial, sans-serif;
+            font-family: 'Montserrat', sans-serif;
         }
-        .card-header {
-            background-color: #007bff;
+
+        .page-header {
+            /*background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));*/
             color: white;
-            font-size: 1.5rem;
-            font-weight: bold;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 0 0 1.5rem 1.5rem;
+            text-align: center;
         }
-        .btn-custom {
-            background-color: #007bff;
+
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            border-radius: 1.5rem;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+            background-color: white;
+        }
+
+        .form-label {
+            font-weight: 600;
+        }
+
+        .btn-submit {
+            background-color: #3498db;
             color: white;
+            font-weight: 600;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            transition: all 0.3s ease;
         }
-        .btn-custom:hover {
-            background-color: #0056b3;
+
+        .btn-submit:hover {
+            background-color: #2980b9;
+        }
+
+        .form-control {
+            border-radius: 0.5rem;
+            padding: 0.8rem;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-<div class="container my-5">
-    <div class="card shadow-lg">
-        <div class="card-header text-center">
-            Chỉnh Sửa
-        </div>
-        <div class="card-body">
-            <form action="Room" method="post">
-                <input type="hidden" name="action" value="editRoom"/>
-                <input type="hidden" name="roomId" value="${Room.roomId}"/>
-
-                <div class="mb-3">
-                    <label for="roomCode" class="form-label">Ma Phong</label>
-                    <input type="text" class="form-control" id="roomCode" name="roomCode" value="${Room.roomCode}" required>
-                </div>
-
-                <div class="mb-3">
-                    <label for="roomDescription" class="form-label">Mo Ta</label>
-                    <input type="text" class="form-control" id="roomDescription" name="roomDescription" value="${Room.roomDescription}" required>
-                </div>
-
-                <div class="mb-3">
-                    <label for="roomImgLink" class="form-label">Mo Ta</label>
-                    <input type="text" class="form-control" id="roomImgLink" name="roomImgLink" value="${Room.roomImgLink}" required>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Thể Loại</label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>${Room.roomTypeId}</option>
-                        <option value="1">Đơn</option>
-                        <option value="2">Đôi</option>
-                        <option value="3">VIP</option>
-                    </select>
-                </div>
-
-                <div class="mb-3">
-                    <label for="roomPrice" class="form-label">Giá Phong</label>
-                    <input type="text" class="form-control" id="roomPrice" name="roomPrice"
-                           value="<fmt:formatNumber value='${Room.roomPrice}' pattern='###,###,###' />" required>
-                </div>
-
-                <div class="mb-3">
-                    <label class="form-label">Trạng Thái</label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>${Room.roomStatus}</option>
-                        <option value="1">Confirming</option>
-                        <option value="2">Available</option>
-                        <option value="3">Completed</option>
-                        <option value="4">Canceled</option>
-                    </select>
-                </div>
-
-                <div class="mt-4 text-end">
-                    <a href="Room?action=listRoom" class="btn btn-secondary me-2">Quay lại</a>
-                    <button type="submit" class="btn btn-custom">Lưu</button>
-                </div>
-            </form>
-        </div>
-    </div>
+<div class="page-header">
+    <h1><i class="fas fa-edit"></i> Cập Nhật Phòng</h1>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<div class="form-container">
+    <form action="Room" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="action" value="updateRoom">
+        <input type="hidden" name="roomId" value="${room.roomId}">
+
+        <div class="mb-3">
+            <label for="roomCode" class="form-label">Mã phòng</label>
+            <input type="text" class="form-control" id="roomCode" name="roomCode" value="${room.roomCode}" required>
+        </div>
+        <div class="mb-3">
+            <label for="roomLocation" class="form-label">Địa điểm</label>
+            <input type="text" class="form-control" id="roomLocation" name="roomLocation" value="${room.roomLocation}" required>
+        </div>
+        <div class="mb-3">
+            <label for="roomTypeId" class="form-label">Loại phòng</label>
+            <select class="form-select" id="roomTypeId" name="roomTypeId" required>
+                <c:forEach var="type" items="${roomTypes}">
+                    <option value="${type.roomTypeId}" ${type.roomTypeId == room.roomTypeId ? 'selected' : ''}>${type.roomTypeName}</option>
+                </c:forEach>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="roomPrice" class="form-label">Giá phòng</label>
+            <input type="number" class="form-control" id="roomPrice" name="roomPrice" value="${room.roomPrice}" required>
+        </div>
+        <div class="mb-3">
+            <label for="roomDescription" class="form-label">Mô tả phòng</label>
+            <textarea class="form-control" id="roomDescription" name="roomDescription" rows="3">${room.roomDescription}</textarea>
+        </div>
+        <div class="mb-3">
+            <label for="roomImgLink" class="form-label">Hình ảnh</label>
+            <input type="file" class="form-control" id="roomImgLink" name="roomImgLink">
+            <div class="mt-2">
+                <img src="${room.roomImgLink}" alt="Current Image" class="img-thumbnail" style="max-width: 200px;">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-submit">Cập Nhật</button>
+        <a href="Room?action=listRoom" class="back-link">Quay lại danh sách phòng</a>
+    </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -1007,7 +1007,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <schema id="292" parent="1" name="income">
-      <LastIntrospectionLocalTimestamp>2024-12-09.02:03:18</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2024-12-09.08:01:58</LastIntrospectionLocalTimestamp>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <schema id="293" parent="1" name="information_schema">
@@ -1035,7 +1035,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <schema id="301" parent="1" name="total_income">
-      <LastIntrospectionLocalTimestamp>2024-12-09.02:03:18</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2024-12-09.08:01:58</LastIntrospectionLocalTimestamp>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <schema id="302" parent="1" name="world">
@@ -1061,39 +1061,49 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <Host>localhost</Host>
       <Plugin>caching_sha2_password</Plugin>
     </user>
-    <table id="308" parent="301" name="booking">
+    <table id="308" parent="301" name="total_income">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <column id="309" parent="308" name="id">
+    <column id="309" parent="308" name="revenue_id">
       <AutoIncrement>1</AutoIncrement>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <column id="310" parent="308" name="room_id">
+    <column id="310" parent="308" name="month">
+      <NotNull>1</NotNull>
       <Position>2</Position>
       <StoredType>int|0s</StoredType>
     </column>
-    <column id="311" parent="308" name="total_income">
+    <column id="311" parent="308" name="year">
       <NotNull>1</NotNull>
       <Position>3</Position>
-      <StoredType>double|0s</StoredType>
+      <StoredType>int|0s</StoredType>
     </column>
-    <column id="312" parent="308" name="booking_date">
-      <NotNull>1</NotNull>
+    <column id="312" parent="308" name="total_revenue">
+      <DefaultExpression>0.00</DefaultExpression>
       <Position>4</Position>
-      <StoredType>date|0s</StoredType>
+      <StoredType>decimal(15,2 digit)|0s</StoredType>
     </column>
     <index id="313" parent="308" name="PRIMARY">
-      <ColNames>id</ColNames>
+      <ColNames>revenue_id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="314" parent="308" name="PRIMARY">
+    <index id="314" parent="308" name="month">
+      <ColNames>month
+year</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <key id="315" parent="308" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <key id="316" parent="308" name="month">
+      <UnderlyingIndexName>month</UnderlyingIndexName>
     </key>
   </database-model>
 </dataSource>

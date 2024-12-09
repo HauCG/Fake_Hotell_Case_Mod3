@@ -1,23 +1,18 @@
 package com.example.fake_hotell_ingroup.dao;
 
-import com.example.fake_hotell_ingroup.model.IncomeStatistics;
-
+import com.example.fake_hotell_ingroup.model.IncomeStat;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.List;
 
 public interface IncomeDAO {
-    List<IncomeStatistics> findAllIncome() throws SQLException;
+    List<IncomeStat> findAllIncome() throws SQLException;
 
-    IncomeStatistics getIncomeById(int userId) throws SQLException;
+    List<IncomeStat> getIncomeByMonth(int month) throws SQLException;
 
-    List<IncomeStatistics> getIncomeByYear(int year) throws SQLException;
+    List<IncomeStat> getIncomeByYear(int year) throws SQLException;
 
-    void exportIncomeToPDF(List<IncomeStatistics> income, String filePath) throws FileNotFoundException;
-
-    void deleteIncome(int userId) throws SQLException;
-
-    List<IncomeStatistics> searchUsers(String keyword) throws SQLException;
-
+    void exportIncomeToPDF(List<IncomeStat> income, String filePath) throws FileNotFoundException;
 
 }

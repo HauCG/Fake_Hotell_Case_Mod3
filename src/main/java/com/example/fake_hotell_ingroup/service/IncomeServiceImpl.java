@@ -1,43 +1,29 @@
 package com.example.fake_hotell_ingroup.service;
 
-import com.example.fake_hotell_ingroup.dao.IncomeDAOImpl;
-import com.example.fake_hotell_ingroup.model.IncomeStatistics;
-
+import com.example.fake_hotell_ingroup.dao.IncomeDAO;
+import com.example.fake_hotell_ingroup.model.IncomeStat;
 import java.sql.SQLException;
-import java.util.Collections;
 import java.util.List;
 
 public class IncomeServiceImpl implements incomeService{
-   private IncomeDAOImpl incomeDao;
-
+    private IncomeDAO incomeDAO ;
     @Override
-    public List<IncomeStatistics> findAllIncome() throws SQLException {
-        try {
-            return incomeDao.findAllIncome();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null; // Trả về null nếu có lỗi xảy ra
-        }
+    public List<IncomeStat> findAllIncome() throws SQLException {
+        return incomeDAO.findAllIncome();
     }
 
     @Override
-    public IncomeStatistics getIncomeById(int userId) throws SQLException {
-        return null;
+    public List<IncomeStat> getIncomeByYear(int year) throws SQLException {
+        return incomeDAO.getIncomeByYear(year);
     }
 
     @Override
-    public int getIncomeByYear(int year) throws SQLException {
-        return 0;
+    public List<IncomeStat> getIncomeByMonth(int month) throws SQLException {
+        return incomeDAO.getIncomeByMonth(month);
     }
 
 
-    @Override
-    public List<IncomeStatistics> searchIncome(String keyword) throws SQLException {
-        return Collections.emptyList();
-    }
-
-    @Override
-    public List<IncomeStatistics> getMonthlyIncomeStats(int year) {
-        return Collections.emptyList();
+    public void setIncomeDAO(IncomeDAO incomeDAO) {
+        this.incomeDAO = incomeDAO;
     }
 }

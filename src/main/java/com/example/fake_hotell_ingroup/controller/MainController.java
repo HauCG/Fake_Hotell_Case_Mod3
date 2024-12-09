@@ -1,69 +1,79 @@
 package com.example.fake_hotell_ingroup.controller;
 
+import com.example.fake_hotell_ingroup.model.IncomeStatistics;
+import com.example.fake_hotell_ingroup.service.IncomeServiceImpl;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.Year;
+import java.util.List;
+
+
 
 @WebServlet(name = "Controller", urlPatterns = "/Fake_Hotell")
 public class MainController extends HttpServlet {
-
+    private IncomeServiceImpl incomeService = new IncomeServiceImpl();
     @Override
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String show = request.getParameter("S");
-        if (show == null || show.isEmpty()) {
-            show = "WelcomePage";
-        }
-        switch (show) {
-            case "WelcomePage":
-                showWelcomePage(request, response);
-                break;
-            case "LoginPage":
-                showLoginPage(request, response);
-                break;
-            case "RegisterPage":
-                showRegisterPage(request, response);
-                break;
-            case "PasswordRecoveryPage":
-                showPasswordRecoveryPage(request, response);
-                break;
-            case "IntroductionPage":
-                showIntroductionPage(request, response);
-                break;
-            case "other":
-                /// other methods
-                break;
-            default:
-                showNotFoundPage(request, response);
-                break;
+        try {
+            showListIncome(request, response);
+        } catch (ServletException er) {
+            er.printStackTrace();
+        } catch (IOException io) {
+            io.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
+    private void showListIncome(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
 
-    private void showWelcomePage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/Main_View/WelcomePage.jsp").forward(request, response);
-    }
 
-    private void showNotFoundPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/Main_View/NotFoundPage.jsp").forward(request, response);
-    }
+            List<IncomeStatistics> year = incomeService.findAllIncome();
+            request.setAttribute("year", year);
+            request.getRequestDispatcher("RoomBooking/incomeview_temporary.jsp").forward(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("errorMessage", "Không thể lấy data.");
+            request.getRequestDispatcher("RoomBooking/incomeview_temporary.jsp").forward(request, response);
+        }
 
-    private void showLoginPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/Authentication_View/LoginPage.jsp").forward(request, response);
     }
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+            String yearParam = request.getParameter("year");
+            int year = (yearParam != null) ? Integer.parseInt(yearParam) : Year.now().getValue();
+            try {
+                List<IncomeStatistics> incomeStats = incomeService.getMonthlyIncomeStats(year);
+                request.setAttribute("incomeStats", incomeStats);
+                request.setAttribute("year", year);
+                getServletContext().getRequestDispatcher("/incomeview_temporary.jsp").forward(request, response);
+            } catch (Exception e) {
+                response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error retrieving income statistics");
+            }
+        }
 
-    private void showRegisterPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/Authentication_View/RegisterPage.jsp").forward(request, response);
-    }
+//        protected void doPost (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//            String action = req.getParameter("action");
+//            String yearParam = req.getParameter("year");
+//            int year = (yearParam != null) ? Integer.parseInt(yearParam) : Year.now().getValue();
+//
+//            if ("export".equals(action)) {
+//                try {
+//                    List<IncomeStatistics> incomeStats = incomeService.getMonthlyIncomeStats(year);
+//                    PDFExporter.exportIncomeStatsToPDF(incomeStats, "C:/exported/income_stats_" + year + ".pdf");
+//                    resp.sendRedirect("export_success.jsp");
+//                } catch (Exception e) {
+//                    resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error exporting PDF");
+//                }
+//            }
+        }
 
-    private void showPasswordRecoveryPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/Authentication_View/PasswordRecoveryPage.jsp").forward(request, response);
-    }
 
-    private void showIntroductionPage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/Main_View/IntroductionPage.jsp").forward(request, response);
-    }
-}
 

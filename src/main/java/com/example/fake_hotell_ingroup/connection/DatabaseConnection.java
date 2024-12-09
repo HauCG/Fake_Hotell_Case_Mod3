@@ -11,7 +11,7 @@ public class DatabaseConnection {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             if (connection == null || connection.isClosed()) {
-                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Fake_Hotell", "ace", "A123456");
+                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/My_Product", "ace", "A123456");
                 System.out.println("Kết nối thành công!");
             }
         } catch (ClassNotFoundException e) {
@@ -19,4 +19,8 @@ public class DatabaseConnection {
         }
         return connection;
     }
+
+
+
 }
+

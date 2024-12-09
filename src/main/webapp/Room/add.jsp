@@ -85,6 +85,7 @@
 
 <div class="form-container">
     <form action="Room" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="action" value="addRoom"/>
         <div class="mb-3">
             <label for="roomCode" class="form-label">Mã phòng</label>
             <input type="text" class="form-control" id="roomCode" name="roomCode" placeholder="Nhập mã phòng" required>
@@ -96,10 +97,9 @@
         <div class="mb-3">
             <label for="roomTypeId" class="form-label">Loại phòng</label>
             <select class="form-select" id="roomTypeId" name="roomTypeId" required>
-                <option value="" selected>Chọn loại phòng</option>
-                <c:forEach var="type" items="${roomTypes}">
-                    <option value="${type.roomTypeId}">${type.roomTypeName}</option>
-                </c:forEach>
+                <option value="1">Đơn</option>
+                <option value="2">Đôi</option>
+                <option value="3">VIP</option>
             </select>
         </div>
         <div class="mb-3">

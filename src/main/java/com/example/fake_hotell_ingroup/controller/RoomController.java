@@ -110,18 +110,10 @@ public class RoomController extends HttpServlet {
         }
         switch (action) {
             case "addRoom":
-                try {
                     addRoom(req, resp);
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
                 break;
             case "editRoom":
-                try {
                     editRoom(req, resp);
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
                 break;
             default:
                 listRoom(req, resp);
@@ -129,34 +121,63 @@ public class RoomController extends HttpServlet {
         }
     }
 
-    private void editRoom(HttpServletRequest req, HttpServletResponse resp) throws IOException, SQLException {
-        int roomId = Integer.parseInt(req.getParameter("roomId"));
-        Integer roomTypeId = Integer.valueOf(req.getParameter("roomTypeId"));
-        String roomCode = req.getParameter("roomCode");
-        String roomLocation = req.getParameter("roomLocation");
-        String roomDescription = req.getParameter("roomDescription");
-        String roomImgLink = req.getParameter("roomImgLink");
-        Double roomPrice = Double.valueOf(req.getParameter("roomPrice"));
+    private void editRoom(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        try {
+            int roomId = Integer.parseInt(req.getParameter("roomId"));
+            Integer roomTypeId = Integer.valueOf(req.getParameter("roomTypeId"));
+            String roomCode = req.getParameter("roomCode");
+            String roomLocation = req.getParameter("roomLocation");
+            String roomDescription = req.getParameter("roomDescription");
+            String roomImgLink = req.getParameter("roomImgLink");
+            Double roomPrice = Double.valueOf(req.getParameter("roomPrice"));
 
-        Room room = new Room(roomId, roomTypeId, roomCode, roomLocation, roomDescription, roomImgLink, roomPrice);
-        roomService.updateRoom(room); // Gọi phương thức update từ RoomService
-        resp.sendRedirect("Room?action=roomId");
+            if (roomCode == null || roomCode.trim().isEmpty() || roomPrice <= 0) {
+                req.setAttribute("error", "Invalid room details!");
+                RequestDispatcher dispatcher = req.getRequestDispatcher("Room/edit.jsp");
+                dispatcher.forward(req, resp);
+                return;
+            }
 
+            Room room = new Room(roomId, roomTypeId, roomCode, roomLocation, roomDescription, roomImgLink, roomPrice);
+            roomService.updateRoom(room);
+            resp.sendRedirect("Room?action=listRoom");
+        } catch (NumberFormatException | NullPointerException e) {
+            req.setAttribute("error", "Invalid input. Please check your data.");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("Room/edit.jsp");
+            dispatcher.forward(req, resp);
+        } catch (SQLException e) {
+            throw new ServletException("Error updating room", e);
+        }
     }
 
-    private void addRoom(HttpServletRequest req, HttpServletResponse resp) throws IOException, SQLException {
-        int roomId = Integer.parseInt(req.getParameter("roomId"));
-        Integer roomTypeId = Integer.valueOf(req.getParameter("roomTypeId"));
-        String roomCode = req.getParameter("roomCode");
-        String roomLocation = req.getParameter("roomLocation");
-        String roomDescription = req.getParameter("roomDescription");
-        String roomImgLink = req.getParameter("roomImgLink");
-        Double roomPrice = Double.valueOf(req.getParameter("roomPrice"));
 
+    private void addRoom(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        try {
+            Integer roomTypeId = Integer.valueOf(req.getParameter("roomTypeId"));
+            String roomCode = req.getParameter("roomCode");
+            String roomLocation = req.getParameter("roomLocation");
+            String roomDescription = req.getParameter("roomDescription");
+            String roomImgLink = req.getParameter("roomImgLink");
+            Double roomPrice = Double.valueOf(req.getParameter("roomPrice"));
 
-        Room room = new Room(roomId, roomTypeId, roomCode, roomLocation, roomDescription, roomImgLink, roomPrice);
-        roomService.addRoom(room);
-        resp.sendRedirect("Room?action=listRoom");
+            if (roomCode == null || roomCode.trim().isEmpty() || roomPrice <= 0) {
+                req.setAttribute("error", "Invalid room details!");
+                RequestDispatcher dispatcher = req.getRequestDispatcher("Room/add.jsp");
+                dispatcher.forward(req, resp);
+                return;
+            }
+
+            Room room = new Room(roomTypeId, roomCode, roomLocation, roomDescription, roomImgLink, roomPrice);
+            roomService.addRoom(room);
+            resp.sendRedirect("Room?action=listRoom");
+        } catch (NumberFormatException | NullPointerException e) {
+            req.setAttribute("error", "Invalid input. Please check your data.");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("Room/add.jsp");
+            dispatcher.forward(req, resp);
+        } catch (SQLException e) {
+            throw new ServletException("Error adding room", e);
+        }
     }
+
 
 }

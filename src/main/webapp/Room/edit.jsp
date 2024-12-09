@@ -85,7 +85,7 @@
 
 <div class="form-container">
     <form action="Room" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="action" value="updateRoom">
+        <input type="hidden" name="action" value="editRoom">
         <input type="hidden" name="roomId" value="${room.roomId}">
 
         <div class="mb-3">
@@ -99,9 +99,9 @@
         <div class="mb-3">
             <label for="roomTypeId" class="form-label">Loại phòng</label>
             <select class="form-select" id="roomTypeId" name="roomTypeId" required>
-                <c:forEach var="type" items="${roomTypes}">
-                    <option value="${type.roomTypeId}" ${type.roomTypeId == room.roomTypeId ? 'selected' : ''}>${type.roomTypeName}</option>
-                </c:forEach>
+                <option value="1">Đơn</option>
+                <option value="2">Đôi</option>
+                <option value="3">VIP</option>
             </select>
         </div>
         <div class="mb-3">

@@ -18,7 +18,77 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Toàn bộ CSS không thay đổi */
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            padding: 2rem 0;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+            url('https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px; /* Bo góc rộng hơn */
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3); /* Đổ bóng mạnh hơn */
+            padding: 2rem 2rem; /* Tăng khoảng cách bên trong */
+            max-width: 1200px; /* Mở rộng chiều rộng tối đa */
+            margin: 3rem auto; /* Tăng khoảng cách với các phần tử khác */
+            backdrop-filter: blur(15px); /* Hiệu ứng làm mờ rõ hơn */
+            border: 1px solid rgba(255, 255, 255, 0.2); /* Viền mỏng hơn */
+            transition: all 0.3s ease-in-out; /* Hiệu ứng chuyển đổi mượt mà */
+        }
+
+
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: white;
+            font-size: 3rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #3498db, #2ecc71);
+            border: none;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46,204,113,0.3);
+        }
+
+        .btn-secondary {
+            background: #95a5a6;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: #7f8c8d;
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -31,7 +101,7 @@
     </div>
 </div>
 
-<div class="container-fluid">
+<div class="container">
     <!-- Hiển thị thông báo lỗi -->
     <c:if test="${not empty errorMessage}">
         <div class="alert alert-danger" role="alert">
@@ -43,7 +113,9 @@
     <!-- Hiển thị danh sách phòng -->
     <div class="card">
         <div class="table-responsive">
-            <a href="Room?action=addRoom" class="btn btn-primary mb-3">Thêm phòng</a>
+            <div>
+                <a href="Room?action=addRoom" class="btn btn-primary mb-3">Thêm phòng</a>
+            </div>
             <c:choose>
                 <c:when test="${not empty room}">
                     <table class="table table-striped">
@@ -70,8 +142,8 @@
                                 <td>
                                     <div class="d-flex">
                                         <a href="Room?action=viewRoom&roomId=${room.roomId}" class="btn btn-info btn-sm me-2">Xem</a>
-                                        <a href="Room?action=editRoom&roomId=${room.roomId}" class="btn btn-warning btn-sm me-2">Sửa</a>
-                                        <a href="Room?action=deleteRoom&roomId=${room.roomId}" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc muốn xóa phòng này không?')">Xóa</a>
+                                        <a href="Room?action=editRoom&roomId=${room.roomId}" class="btn btn-warning btn-sm me-2">Update</a>
+                                        <a href="Room?action=deleteRoom&roomId=${room.roomId}" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc muốn xóa phòng này không?')">Delete</a>
                                     </div>
                                 </td>
                             </tr>

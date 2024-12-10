@@ -32,7 +32,7 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public void updateRoom(Room room) throws SQLException {
-        roomDao.updateRoom(room);
+        roomDao.updateRoomttoSQL(room);
     }
 
     @Override

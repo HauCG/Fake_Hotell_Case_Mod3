@@ -93,7 +93,7 @@ public class RoomDaoImpl implements RoomDao {
     }
 
     @Override
-    public boolean updateRoom(Room room) throws SQLException {
+    public boolean updateRoomttoSQL(Room room) throws SQLException {
         boolean rowUpdated;
         try (Connection connection = databaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_ROOM_SQL)) {

@@ -49,6 +49,15 @@ public class RoomController extends HttpServlet {
                     throw new RuntimeException(e);
                 }
                 break;
+            case "listRoom":
+                listRoom(req, resp);
+                break;
+
+            case "addRoomv":
+                addRoom(req, resp);
+                break;
+            case "editRoomv":
+                editRoom(req, resp);
             default:
                 listRoom(req, resp);
                 break;
@@ -124,12 +133,12 @@ public class RoomController extends HttpServlet {
     private void editRoom(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         try {
             int roomId = Integer.parseInt(req.getParameter("roomId"));
-            Integer roomTypeId = Integer.valueOf(req.getParameter("roomTypeId"));
+            int roomTypeId = Integer.parseInt(req.getParameter("roomTypeId"));
             String roomCode = req.getParameter("roomCode");
             String roomLocation = req.getParameter("roomLocation");
             String roomDescription = req.getParameter("roomDescription");
             String roomImgLink = req.getParameter("roomImgLink");
-            Double roomPrice = Double.valueOf(req.getParameter("roomPrice"));
+            double roomPrice = Double.parseDouble(req.getParameter("roomPrice"));
 
             if (roomCode == null || roomCode.trim().isEmpty() || roomPrice <= 0) {
                 req.setAttribute("error", "Invalid room details!");
@@ -137,10 +146,10 @@ public class RoomController extends HttpServlet {
                 dispatcher.forward(req, resp);
                 return;
             }
-
             Room room = new Room(roomId, roomTypeId, roomCode, roomLocation, roomDescription, roomImgLink, roomPrice);
             roomService.updateRoom(room);
-            resp.sendRedirect("Room?action=listRoom");
+            req.getRequestDispatcher("Room?action=listRoom").forward(req, resp);
+//            resp.sendRedirect("Room?action=listRoom");
         } catch (NumberFormatException | NullPointerException e) {
             req.setAttribute("error", "Invalid input. Please check your data.");
             RequestDispatcher dispatcher = req.getRequestDispatcher("Room/edit.jsp");
@@ -158,7 +167,7 @@ public class RoomController extends HttpServlet {
             String roomLocation = req.getParameter("roomLocation");
             String roomDescription = req.getParameter("roomDescription");
             String roomImgLink = req.getParameter("roomImgLink");
-            Double roomPrice = Double.valueOf(req.getParameter("roomPrice"));
+            double roomPrice = Double.parseDouble(req.getParameter("roomPrice"));
 
             if (roomCode == null || roomCode.trim().isEmpty() || roomPrice <= 0) {
                 req.setAttribute("error", "Invalid room details!");
@@ -166,10 +175,10 @@ public class RoomController extends HttpServlet {
                 dispatcher.forward(req, resp);
                 return;
             }
-
             Room room = new Room(roomTypeId, roomCode, roomLocation, roomDescription, roomImgLink, roomPrice);
             roomService.addRoom(room);
-            resp.sendRedirect("Room?action=listRoom");
+            req.getRequestDispatcher("Room?action=listRoom").forward(req, resp);
+//            resp.sendRedirect("Room?action=listRoom");
         } catch (NumberFormatException | NullPointerException e) {
             req.setAttribute("error", "Invalid input. Please check your data.");
             RequestDispatcher dispatcher = req.getRequestDispatcher("Room/add.jsp");

@@ -19,62 +19,74 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: "Poppins", sans-serif;
+        }
+
         body {
-            background-color: #f8f9fa;
-            font-family: 'Montserrat', sans-serif;
+            min-height: 100vh;
+            padding: 2rem 0;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+            url('https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
         }
 
-        .page-header {
-            /*background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));*/
-            color: white;
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
             padding: 2rem;
-            margin-bottom: 2rem;
-            border-radius: 0 0 1.5rem 1.5rem;
-            text-align: center;
-        }
-
-        .form-container {
             max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem;
-            border-radius: 1.5rem;
-            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-            background-color: white;
+            margin: auto;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .form-label {
-            font-weight: 600;
-        }
-
-        .btn-submit {
-            background-color: #3498db;
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
             color: white;
-            font-weight: 600;
+            font-size: 3rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #3498db, #2ecc71);
             border: none;
-            border-radius: 0.5rem;
-            padding: 0.8rem 1.5rem;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46,204,113,0.3);
+        }
+
+        .btn-secondary {
+            background: #95a5a6;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
             transition: all 0.3s ease;
         }
 
-        .btn-submit:hover {
-            background-color: #2980b9;
-        }
-
-        .form-control {
-            border-radius: 0.5rem;
-            padding: 0.8rem;
-        }
-
-        .back-link {
-            display: inline-block;
-            margin-top: 1rem;
-            color: #3498db;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .back-link:hover {
-            text-decoration: underline;
+        .btn-secondary:hover {
+            background: #7f8c8d;
+            color: white;
         }
     </style>
 </head>
@@ -83,9 +95,9 @@
     <h1><i class="fas fa-plus-circle"></i> Thêm Phòng Mới</h1>
 </div>
 
-<div class="form-container">
-    <form action="Room" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="action" value="addRoom"/>
+<div class="container">
+    <form action="Room" method="get" enctype="multipart/form-data">
+        <input type="hidden" name="action" value="addRoomv"/>
         <div class="mb-3">
             <label for="roomCode" class="form-label">Mã phòng</label>
             <input type="text" class="form-control" id="roomCode" name="roomCode" placeholder="Nhập mã phòng" required>
@@ -94,6 +106,10 @@
             <label for="roomLocation" class="form-label">Địa điểm</label>
             <input type="text" class="form-control" id="roomLocation" name="roomLocation" placeholder="Nhập địa điểm" required>
         </div>
+<%--        <div class="mb-3">--%>
+<%--            <label for="roomTypeId" class="form-label">loại phòng</label>--%>
+<%--            <input type="number" class="form-control" id="roomTypeId" name="roomTypeId" placeholder="Nhập địa điểm" required>--%>
+<%--        </div>--%>
         <div class="mb-3">
             <label for="roomTypeId" class="form-label">Loại phòng</label>
             <select class="form-select" id="roomTypeId" name="roomTypeId" required>
@@ -111,11 +127,17 @@
             <textarea class="form-control" id="roomDescription" name="roomDescription" rows="3" placeholder="Nhập mô tả"></textarea>
         </div>
         <div class="mb-3">
-            <label for="roomImgLink" class="form-label">Hình ảnh</label>
-            <input type="file" class="form-control" id="roomImgLink" name="roomImgLink">
+            <label for="roomImgLink" class="form-label">Link Ảnh</label>
+            <input type="text" class="form-control" id="roomImgLink" name="roomImgLink"  placeholder="Link ảnh"></input>
         </div>
-        <button type="submit" class="btn btn-submit">Thêm phòng</button>
-        <a href="Room?action=listRoom" class="back-link">Quay lại danh sách phòng</a>
+<%--        <div class="mb-3">--%>
+<%--            <label for="roomImgLink" class="form-label">Hình ảnh</label>--%>
+<%--            <input type="file" class="form-control" id="roomImgLink" name="roomImgLink">--%>
+<%--        </div>--%>
+        <div>
+            <button type="submit" class="btn btn-primary">Thêm phòng</button>
+            <a href="Room?action=listRoom" class="btn btn-secondary btn-back">Quay lại</a>
+        </div>
     </form>
 </div>
 

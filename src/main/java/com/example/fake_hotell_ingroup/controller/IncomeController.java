@@ -30,6 +30,7 @@ public class IncomeController extends HttpServlet {
         incomeService = new IncomeServiceImpl();
         incomeService.setIncomeDAO(incomeDAO);
     }
+
     @Override
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -40,8 +41,17 @@ public class IncomeController extends HttpServlet {
         try {
             List<IncomeStat> incomeStats;
             double totalIncome = 0;
-
-            if (yearParam != null && monthParam != null) {
+            // Kiểm tra valid month
+            if (monthParam != null && !monthParam.isEmpty()) {
+                int month = Integer.parseInt(monthParam);
+                if (month < 1 || month > 12) {
+                    // Nếu tháng không hợp lệ, chuyển tới trang lỗi
+                    request.setAttribute("errorMessage", "Month must be between 1 and 12.");
+                    request.getRequestDispatcher("/error.jsp").forward(request, response);
+                    return;
+                }
+            }
+            if (yearParam != null && !yearParam.isEmpty() && monthParam != null && !monthParam.isEmpty()) {
                 // Xử lý khi cả year và month có giá trị
                 int year = Integer.parseInt(yearParam);
                 int month = Integer.parseInt(monthParam);
@@ -50,7 +60,7 @@ public class IncomeController extends HttpServlet {
                         .mapToDouble(IncomeStat::getTotal_revenue)
                         .sum();
                 request.setAttribute("filter", "year_and_month");
-            } else if (yearParam != null) {
+            } else if (yearParam != null && !yearParam.isEmpty()) {
                 // Xử lý khi chỉ có year
                 int year = Integer.parseInt(yearParam);
                 incomeStats = incomeService.getIncomeByYear(year);
@@ -58,7 +68,7 @@ public class IncomeController extends HttpServlet {
                         .mapToDouble(IncomeStat::getTotal_revenue)
                         .sum();
                 request.setAttribute("filter", "year");
-            } else if (monthParam != null) {
+            } else if (monthParam != null && !monthParam.isEmpty()) {
                 // Xử lý khi chỉ có month
                 int month = Integer.parseInt(monthParam);
                 incomeStats = incomeService.getIncomeByMonth(month);
@@ -85,51 +95,6 @@ public class IncomeController extends HttpServlet {
         }
     }
 
-//    @Override
-//    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-//            throws ServletException, IOException {
-//        String yearParam = request.getParameter("year");
-//        String monthParam = request.getParameter("month");
-//
-//        try {
-//            List<IncomeStat> incomeStats;
-//            double totalIncome = 0;
-//            if (yearParam != null) {
-//                int year = Integer.parseInt(yearParam);
-//                incomeStats = incomeService.getIncomeByYear(year);
-//                totalIncome = incomeStats.stream()
-//                        .mapToDouble(IncomeStat::getTotal_revenue)
-//                        .sum();
-//                request.setAttribute("incomeStats", incomeStats);
-//                request.setAttribute("filter", "year");
-//            } else if (monthParam != null) {
-//                int month = Integer.parseInt(monthParam);
-//                incomeStats = incomeService.getIncomeByMonth(month);
-//                totalIncome = incomeStats.stream()
-//                        .mapToDouble(IncomeStat::getTotal_revenue)
-//                        .sum();
-//                request.setAttribute("filter", "month");
-//            } else if (yearParam != null && monthParam != null) {
-//                int year = Integer.parseInt(yearParam);
-//                int month = Integer.parseInt(monthParam);
-//                incomeStats = incomeService.getIncomeByYearAndMonth(year, month);
-//                request.setAttribute("filter", "year_and_month");
-//            } else{
-//                incomeStats = incomeService.findAllIncome();
-//                totalIncome = incomeStats.stream()
-//                        .mapToDouble(IncomeStat::getTotal_revenue)
-//                        .sum();
-//                request.setAttribute("filter", "all");
-//            }
-//            request.setAttribute("incomeStats", incomeStats);
-//            request.setAttribute("totalIncome", totalIncome);
-//            request.getRequestDispatcher("income/index.jsp").forward(request, response);
-//        } catch (NumberFormatException e) {
-//            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid filter parameter.");
-//        } catch (SQLException e) {
-//            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Database error.");
-//        }
-//    }
 }
 
 

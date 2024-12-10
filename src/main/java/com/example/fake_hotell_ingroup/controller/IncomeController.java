@@ -39,6 +39,7 @@ public class IncomeController extends HttpServlet {
         String monthParam = request.getParameter("month");
 
         try {
+            double totalIncomeForYear = 0;
             if (yearParam != null) {
                 int year = Integer.parseInt(yearParam);
                 List<IncomeStat> incomeStats = incomeService.getIncomeByYear(year);
@@ -55,7 +56,7 @@ public class IncomeController extends HttpServlet {
                 request.setAttribute("filter", "all");
             }
 
-            request.getRequestDispatcher("/index.jsp").forward(request, response);
+            request.getRequestDispatcher("income/index.jsp").forward(request, response);
         } catch (NumberFormatException e) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid filter parameter.");
         } catch (SQLException e) {

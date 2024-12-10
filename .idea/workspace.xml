@@ -5,19 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="593b0bf2-8920-4fda-a742-c400d39d3b5d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/fake_hotell_ingroup/controller/IncomeController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/fake_hotell_ingroup/model/IncomeStat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/1a9e9bf9-4ba7-47f4-9f95-fee2667072da.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/1a9e9bf9-4ba7-47f4-9f95-fee2667072da.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/fake_hotell_ingroup/connection/DatabaseConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/fake_hotell_ingroup/connection/DatabaseConnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/fake_hotell_ingroup/controller/MainController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/fake_hotell_ingroup/dao/IncomeDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/fake_hotell_ingroup/dao/IncomeDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/fake_hotell_ingroup/controller/IncomeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/fake_hotell_ingroup/controller/IncomeController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/fake_hotell_ingroup/dao/IncomeDAOImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/fake_hotell_ingroup/dao/IncomeDAOImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/fake_hotell_ingroup/model/IncomeStatistics.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/fake_hotell_ingroup/service/IncomeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/fake_hotell_ingroup/service/IncomeServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/fake_hotell_ingroup/service/incomeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/fake_hotell_ingroup/service/incomeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/income/Export.jsp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/income/incomeStatistics.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/income/incomeStatistics.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/income/incomeview_temporary.jsp" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/income/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/income/index.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -211,6 +201,7 @@
       <workItem from="1733452590363" duration="11250000" />
       <workItem from="1733551009789" duration="3709000" />
       <workItem from="1733706565364" duration="28182000" />
+      <workItem from="1733759556830" duration="3198000" />
     </task>
     <servers />
   </component>
@@ -227,5 +218,20 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/example/fake_hotell_ingroup/dao/IncomeDAOImpl.java</url>
+          <line>18</line>
+          <properties class="com.example.fake_hotell_ingroup.dao.IncomeDAOImpl" method="findAllIncome">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

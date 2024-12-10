@@ -17,23 +17,28 @@ public class IncomeDAOImpl implements IncomeDAO {
 
     @Override
     public List<IncomeStat> findAllIncome() throws SQLException {
-        String query = "SELECT revenue_id, month, year, total_revenue FROM total_income";
-        List<IncomeStat> incomeStats = new ArrayList<>();
-
-        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-             Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(query)) {
-
-            while (resultSet.next()) {
-                IncomeStat incomeStat = new IncomeStat(
-                        resultSet.getInt("revenue_id"),
-                        resultSet.getInt("month"),
-                        resultSet.getInt("year"),
-                        resultSet.getDouble("total_revenue")
-                );
-                incomeStats.add(incomeStat);
-            }
+            String query = "SELECT revenue_id, month, year, total_revenue FROM total_income";
+            List<IncomeStat> incomeStats = new ArrayList<>();
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver"); // Đăng ký driver (không cần thiết nếu dùng JDBC 4.0+)
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException("MySQL JDBC Driver not found.", e);
         }
+
+            try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+                 Statement statement = connection.createStatement();
+                 ResultSet resultSet = statement.executeQuery(query)) {
+
+                while (resultSet.next()) {
+                    IncomeStat incomeStat = new IncomeStat(
+                            resultSet.getInt("revenue_id"),
+                            resultSet.getInt("month"),
+                            resultSet.getInt("year"),
+                            resultSet.getDouble("total_revenue")
+                    );
+                    incomeStats.add(incomeStat);
+                }
+            }
         return incomeStats;
     }
 

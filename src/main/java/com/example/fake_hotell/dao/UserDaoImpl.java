@@ -1,4 +1,4 @@
-package com.example.fake_hotell.dao.user;
+package com.example.fake_hotell.dao;
 
 import com.example.fake_hotell.connection.DatabaseConnection;
 import com.example.fake_hotell.model.User;

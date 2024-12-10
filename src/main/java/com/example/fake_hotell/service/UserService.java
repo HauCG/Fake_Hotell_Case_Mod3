@@ -1,4 +1,4 @@
-package com.example.fake_hotell.service.user;
+package com.example.fake_hotell.service;
 
 import com.example.fake_hotell.model.User;
 

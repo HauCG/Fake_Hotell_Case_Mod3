@@ -149,44 +149,48 @@
                 ${errorMessage}
         </div>
     </c:if>
-
-    <div class="card">
-        <div class="card-header">
-            <h2 class="mb-0">Danh Sách Phòng</h2>
+    <div class="page-header">
+        <div class="container-fluid">
+            <h1 class="text-center mb-0">
+                <i class="fas fa-hotel me-2"></i>
+                Danh sách phòng
+            </h1>
         </div>
-        <div class="card-body">
+    </div>
+    <div class="card">
+        <div class="table-responsive">
+            <div>
+                <a href="/Fake_Hotell?S=addRoom" class="btn btn-primary mb-3">Thêm phòng</a>
+            </div>
             <c:choose>
                 <c:when test="${not empty room}">
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th>Mã Phòng</th>
-                            <th>Tên Phòng</th>
-                            <th>Địa Điểm</th>
-                            <th>Giá</th>
-                            <th>Trạng Thái</th>
-                            <th>Hành động</th>
+                            <th><i class="fas fa-hashtag me-2"></i>Mã phòng</th>
+                            <th><i class="fas fa-location-arrow me-2"></i>Địa điểm</th>
+                            <th><i class="fas fa-info-circle me-2"></i>Thể loại</th>
+                            <th><i class="fas fa-image me-2"></i>Hình ảnh</th>
+                            <th><i class="fas fa-tag me-2"></i>Giá</th>
+                            <th><i class="fas fa-align-left me-2"></i>Mô tả</th>
+                            <th><i class="fas fa-cogs me-2"></i>Hành động</th>
                         </tr>
                         </thead>
                         <tbody>
                         <c:forEach var="room" items="${room}">
                             <tr>
-                                <td>${room.roomCode}</td>
-                                <td>${room.roomName}</td>
+                                <td><strong>${room.roomCode}</strong></td>
                                 <td>${room.roomLocation}</td>
-                                <td>${room.roomPrice}</td>
-                                <td>${room.roomStatus}</td>
+                                <td>${room.roomTypeId}</td>
+                                <td><img src="${room.roomImgLink}" class="img-thumbnail" alt="Hình ảnh phòng" style="width: 100px;"></td>
+                                <td class="price">${room.roomPrice} VNĐ</td>
+                                <td>${room.roomDescription}</td>
                                 <td>
-                                    <c:if test="${user.userRole == 'admin'}">
-                                        <div class="d-flex">
-                                            <a href="Room?action=viewRoom&roomId=${room.roomId}" class="btn btn-info btn-sm me-2">Xem</a>
-                                            <a href="Room?action=editRoom&roomId=${room.roomId}" class="btn btn-warning btn-sm me-2">Sửa</a>
-                                            <a href="Room?action=deleteRoom&roomId=${room.roomId}" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc muốn xóa phòng này không?')">Xóa</a>
-                                        </div>
-                                    </c:if>
-                                    <c:if test="${user.userRole == 'customer'}">
-                                        <a href="Room?action=viewRoom&roomId=${room.roomId}" class="btn btn-info btn-sm me-2">Xem</a>
-                                    </c:if>
+                                    <div class="d-flex">
+                                        <a href="Fake_Hotell?S=viewRoom&roomId=${room.roomId}" class="btn btn-info btn-sm me-2">Xem</a>
+                                        <a href="Fake_Hotell?S=editRoom&roomId=${room.roomId}" class="btn btn-warning btn-sm me-2">Update</a>
+                                        <a href="Fake_Hotell?S=deleteRoom&roomId=${room.roomId}" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc muốn xóa phòng này không?')">Delete</a>
+                                    </div>
                                 </td>
                             </tr>
                         </c:forEach>

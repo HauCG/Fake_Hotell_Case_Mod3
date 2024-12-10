@@ -1,7 +1,7 @@
-package com.example.fake_hotell.service.user;
+package com.example.fake_hotell.service;
 
-import com.example.fake_hotell.dao.user.UserDao;
-import com.example.fake_hotell.dao.user.UserDaoImpl;
+import com.example.fake_hotell.dao.UserDao;
+import com.example.fake_hotell.dao.UserDaoImpl;
 import com.example.fake_hotell.model.User;
 
 import java.sql.SQLException;

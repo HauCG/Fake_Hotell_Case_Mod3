@@ -3,6 +3,7 @@ package com.example.fake_hotell_ingroup.service;
 import com.example.fake_hotell_ingroup.dao.IncomeDAO;
 import com.example.fake_hotell_ingroup.model.IncomeStat;
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
 
 public class IncomeServiceImpl implements incomeService{
@@ -22,7 +23,10 @@ public class IncomeServiceImpl implements incomeService{
         return incomeDAO.getIncomeByMonth(month);
     }
 
-
+    @Override
+    public List<IncomeStat> getIncomeByYearAndMonth(int year, int month) throws SQLException {
+        return incomeDAO.getIncomeByYearAndMonth(year, month);
+    }
     public void setIncomeDAO(IncomeDAO incomeDAO) {
         this.incomeDAO = incomeDAO;
     }

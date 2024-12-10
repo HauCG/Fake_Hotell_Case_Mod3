@@ -13,6 +13,8 @@ public interface IncomeDAO {
 
     List<IncomeStat> getIncomeByYear(int year) throws SQLException;
 
+    List<IncomeStat> getIncomeByYearAndMonth(int year, int month) throws SQLException;
+
     void exportIncomeToPDF(List<IncomeStat> income, String filePath) throws FileNotFoundException;
 
 }

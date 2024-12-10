@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.sql.*;
 import java.util.ArrayList;
 
+import java.util.Collections;
 import java.util.List;
 
 
@@ -90,6 +91,34 @@ public class IncomeDAOImpl implements IncomeDAO {
         return incomeStats;
     }
 
+
+
+    @Override
+    public List<IncomeStat> getIncomeByYearAndMonth(int year, int month) throws SQLException {
+        String query = "SELECT revenue_id, month, year, total_revenue FROM total_income WHERE year = ? and month = ?";
+        List<IncomeStat> incomeStats = new ArrayList<>();
+
+        try (Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            preparedStatement.setInt(1, year);
+            preparedStatement.setInt(2, month);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    IncomeStat incomeStat = new IncomeStat(
+                            resultSet.getInt("revenue_id"),
+                            resultSet.getInt("month"),
+                            resultSet.getInt("year"),
+                            resultSet.getDouble("total_revenue")
+                    );
+                    incomeStats.add(incomeStat);
+                }
+            }
+        }
+        return incomeStats;
+    }
+
+
     @Override
     public void exportIncomeToPDF(List<IncomeStat> income, String filePath) throws FileNotFoundException {
         // Placeholder: Add logic to export to PDF (e.g., using iText or another library)
@@ -98,26 +127,4 @@ public class IncomeDAOImpl implements IncomeDAO {
 }
 
 
-
-
-//    @Override
-//    public void exportIncomeToPDF(List<IncomeStat> income, String filePath) throws FileNotFoundException {
-//        Document document = new Document();
-//        PdfWriter.getInstance(document, new FileOutputStream(filePath));
-//
-//        document.open();
-//        document.add(new Paragraph("Thống kê thu nhập"));
-//        document.add(new Paragraph(" "));
-//
-//        PdfPTable table = new PdfPTable(2);
-//        table.addCell("Tháng");
-//        table.addCell("Tổng tiền");
-//
-//        for (IncomeStats stat : stats) {
-//            table.addCell(String.valueOf(stat.getMonth()));
-//            table.addCell(String.format("%.2f", stat.getTotalIncome()));
-//        }
-//
-//        document.add(table);
-//        document.close();
 

@@ -11,4 +11,6 @@ public interface incomeService {
     List<IncomeStat> getIncomeByYear(int year) throws SQLException;
 
     List<IncomeStat> getIncomeByMonth(int month) throws SQLException;
+
+    List<IncomeStat> getIncomeByYearAndMonth(int year, int month) throws SQLException;
 }
